@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta property="og:title" content="BloxTools – Roblox Copying Tools">
+<meta property="og:description" content="Copy games, clothes, and UGC on Roblox – for free, with premium-level speed and support.">
+<meta property="og:url" content="https://bloxtools.space">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://bloxtools.space/">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "BloxTools",
+  "url": "https://bloxtools.space",
+  "logo": "https://bloxtools.space/assets/img/Atryx.png",
+  "sameAs": [
+    "https://discord.gg/atryx"
+  ],
+  "description": "Free Roblox tools to copy games, shirts, and UGC. Fast and secure copying bots for Roblox creators."
+}
+</script>
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="keywords" content="copy games, copy clothes, follow bot, roblox free followers, roblox follow bot, roblox followers, roblox shirt, roblox shirt bot, roblox copy game, roblox download game,BloxTools">
+<meta name="robots" content="index">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BloxTools – Free Roblox game, clothing, and UGC copying tools. Easy to use, fast, and secure.">
+    <title>BloxTools – Free Roblox Copy Tools for Games, Clothes & UGC</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Rain Effect */
+        #rainCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        /* Cursor Glow */
+        #cursorGlow {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(147, 51, 234, 0.2);
+            filter: blur(12px);
+            pointer-events: none;
+            z-index: 50;
+            transition: all 0.3s ease-out;
+        }
+
+        /* Navigation */
+        #navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 40;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(147, 51, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logo-section:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #9333ea, #6b21a8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.4);
+        }
+
+        .logo-icon span {
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #fff, #f3e8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            position: relative;
+            background: none;
+            border: none;
+            color: #d1d5db;
+            font-size: 1.125rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #9333ea, #6b21a8);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #9333ea;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(147, 51, 234, 0.1);
+        }
+
+        .mobile-nav {
+            display: none;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(147, 51, 234, 0.2);
+        }
+
+        .mobile-nav-content {
+            padding: 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-nav-link {
+            background: none;
+            border: none;
+            color: #d1d5db;
+            font-size: 1.125rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 8px;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-link:hover {
+            color: #9333ea;
+            background: rgba(147, 51, 234, 0.05);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(107, 33, 168, 0.1) 0%, #000 50%, rgba(107, 33, 168, 0.1) 100%);
+        }
+
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .bg-element-1 {
+            top: 25%;
+            left: 25%;
+            width: 384px;
+            height: 384px;
+            background: rgba(147, 51, 234, 0.05);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .bg-element-2 {
+            bottom: 25%;
+            right: 25%;
+            width: 512px;
+            height: 512px;
+            background: rgba(147, 51, 234, 0.03);
+            animation: pulse 4s ease-in-out infinite 1s;
+        }
+
+        .bg-element-3 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 640px;
+            height: 640px;
+            background: linear-gradient(45deg, rgba(147, 51, 234, 0.02), rgba(107, 33, 168, 0.02));
+            animation: spin 20s linear infinite;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            max-width: 80rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(to right, rgba(147, 51, 234, 0.1), rgba(107, 33, 168, 0.1));
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            border-radius: 50px;
+            padding: 12px 24px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-badge i {
+            color: #9333ea;
+        }
+
+        .hero-badge span {
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .cursor {
+            color: #9333ea;
+            animation: blink 1s infinite;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .title-blox {
+            background: linear-gradient(to right, #fff, #f3e8ff, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-tools {
+            background: linear-gradient(to right, #9333ea, #6b21a8, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.3));
+        }
+
+        .hero-description {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: #d1d5db;
+            margin-bottom: 3rem;
+            max-width: 64rem;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .hero-btn {
+            position: relative;
+            background: linear-gradient(to right, #9333ea, #6b21a8);
+            border: none;
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.25);
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(147, 51, 234, 0.5);
+        }
+
+        .btn-shimmer {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .hero-btn:hover .btn-shimmer {
+            left: 100%;
+        }
+
+        .btn-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-content i {
+            transition: transform 0.3s ease;
+        }
+
+        .hero-btn:hover .btn-content i {
+            transform: translateX(4px);
+        }
+
+        /* Tools Section */
+        .tools-section {
+            padding: 8rem 0;
+            position: relative;
+            background: linear-gradient(to bottom, #000, rgba(17, 24, 39, 0.5), #000);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .title-white {
+            background: linear-gradient(to right, #fff, #d1d5db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-purple {
+            background: linear-gradient(to right, #9333ea, #6b21a8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            max-width: 32rem;
+            margin: 0 auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 88rem;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            position: relative;
+            background: linear-gradient(to bottom, rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.4));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.5s ease;
+            overflow: visible;
+        }
+
+        .tool-card:hover {
+            transform: scale(1.02) translateY(-8px);
+            border-color: rgba(147, 51, 234, 0.4);
+        }
+
+        .tool-card.featured {
+            border: 2px solid rgba(147, 51, 234, 0.5);
+            padding-top: 3rem;
+        }
+
+        .tool-card.featured:hover {
+            border-color: rgba(147, 51, 234, 0.7);
+        }
+
+        .card-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(147, 51, 234, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border-radius: 24px;
+        }
+
+        .tool-card:hover .card-glow {
+            opacity: 1;
+        }
+
+        .card-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #9333ea, transparent);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .tool-card.featured .card-border {
+            height: 8px;
+            background: linear-gradient(to right, #9333ea, #6b21a8, #9333ea);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(to right, #9333ea, #6b21a8);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: bold;
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.5);
+            z-index: 20;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #9333ea, #6b21a8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.25);
+        }
+
+        .card-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .card-subtitle {
+            color: #9333ea;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .card-description {
+            color: #d1d5db;
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .card-features {
+            margin-bottom: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            color: white;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #9333ea, #6b21a8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-icon i {
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        .feature span {
+            color: #d1d5db;
+            transition: color 0.3s ease;
+        }
+
+        .card-footer {
+            text-align: center;
+        }
+
+        .card-cta-text {
+            color: #9333ea;
+            font-weight: bold;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-btn {
+            position: relative;
+            width: 100%;
+            background: linear-gradient(to right, #9333ea, #6b21a8);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.25);
+            overflow: hidden;
+        }
+
+        .card-btn:hover {
+            box-shadow: 0 12px 40px rgba(147, 51, 234, 0.5);
+        }
+
+        .card-btn:hover .btn-shimmer {
+            left: 100%;
+        }
+
+        .card-btn:hover .btn-content i {
+            transform: translateX(4px);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 8rem 0;
+            background: linear-gradient(to bottom, #000, rgba(17, 24, 39, 0.3), #000);
+        }
+
+        .faq-container {
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: linear-gradient(to right, rgba(17, 24, 39, 0.5), rgba(17, 24, 39, 0.3));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(147, 51, 234, 0.4);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.1);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 600;
+            padding: 1.5rem 2rem;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #9333ea;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            color: #d1d5db;
+            padding: 0 2rem 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 8rem 0;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-bg {
+            position: absolute;
+            inset: 0;
+        }
+
+        .bg-element-4 {
+            top: 50%;
+            left: 25%;
+            width: 384px;
+            height: 384px;
+            background: rgba(147, 51, 234, 0.05);
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .bg-element-5 {
+            bottom: 25%;
+            right: 25%;
+            width: 384px;
+            height: 384px;
+            background: rgba(107, 33, 168, 0.05);
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .contact-content {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 24rem;
+            margin: 0 auto;
+        }
+
+        .contact-btn {
+            position: relative;
+            padding: 1rem 2.5rem;
+            border-radius: 16px;
+            font-size: 1.125rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .contact-btn.primary {
+            background: linear-gradient(to right, #9333ea, #6b21a8);
+            border: none;
+            color: white;
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.25);
+        }
+
+        .contact-btn.primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(147, 51, 234, 0.5);
+        }
+
+        .contact-btn.secondary {
+            background: transparent;
+            border: 2px solid rgba(147, 51, 234, 0.5);
+            color: #9333ea;
+        }
+
+        .contact-btn.secondary:hover {
+            background: rgba(147, 51, 234, 0.1);
+            border-color: #9333ea;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.25);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 0;
+            background: linear-gradient(to top, #111827, #000);
+            border-top: 1px solid rgba(147, 51, 234, 0.2);
+        }
+
+        .footer-text {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 1.125rem;
+        }
+
+        .heart {
+            color: #9333ea;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-nav.active {
+                display: block;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 640px) {
+            .contact-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+/* Carousel Styles */
+.carousel-wrapper {
+  position: relative;
+  max-width: 100%;
+  overflow: visible;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+.tools-carousel {
+  display: flex;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+.tool-card {
+  flex: 0 0 calc(100% / 3);
+  max-width: calc(100% / 3);
+  box-sizing: border-box;
+  margin: 0 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  scroll-snap-align: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: scale(0.85);
+  opacity: 0.6;
+}
+.tool-card.active {
+  transform: scale(1.1);
+  opacity: 1;
+  z-index: 2;
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+.carousel-btn.prev { left: 0; }
+.carousel-btn.next { right: 0; }
+  }
+  @media (max-width: 768px) {
+    .tools-carousel {
+      flex-direction: column;
+      overflow-x: visible;
+    }
+
+    .carousel-btn {
+      display: none;
+    }
+  }
+  /* Ensure Try Now links display as buttons */
+  .card-btn {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+  }
+    </style>
+</head>
+<body>
+    <!-- Rain Effect Canvas -->
+    <canvas id="rainCanvas"></canvas>
+    
+    <!-- Cursor Glow -->
+    <div id="cursorGlow"></div>
+
+    <!-- Navigation -->
+    <header id="navbar">
+        <div class="container">
+            <nav class="nav-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <span>BT</span>
+                    </div>
+                    <span class="logo-text">BloxTools</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="nav-links">
+                    <button class="nav-link active" data-section="home">Home</button>
+                    <button class="nav-link" data-section="tools">Tools</button>
+                    <button class="nav-link" data-section="faq">FAQ</button>
+                    <button class="nav-link" data-section="contact">Contact</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav" id="mobileNav">
+                <div class="mobile-nav-content">
+                    <button class="mobile-nav-link" data-section="home">Home</button>
+                    <button class="mobile-nav-link" data-section="tools">Tools</button>
+                    <button class="mobile-nav-link" data-section="faq">FAQ</button>
+                    <button class="mobile-nav-link" data-section="contact">Contact</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-bg">
+            <div class="bg-element bg-element-1"></div>
+            <div class="bg-element bg-element-2"></div>
+            <div class="bg-element bg-element-3"></div>
+        </div>
+
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    <span id="typedText">BloxTools</span>
+                    <span class="cursor">|</span>
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="title-blox">Blox</span>
+                    <span class="title-tools">Tools</span>
+                </h1>
+
+                <p class="hero-description">
+                    Easy to use tools, with detailed instructions on how to use them! These tools consist of a shirt copier,
+                    game copier, and a follower botter. We made all this just to make roblox simple again!
+                   ⚠️ BEWARE ACCOUNTS YOUNGER THAN 200 DAYS WONT WORK TO PREVENT FROM SPAMMING OUR TOOLS⚠️
+                </p>
+
+                <button class="hero-btn" data-section="tools">
+                    <span class="btn-shimmer"></span>
+                    <span class="btn-content">
+                        Start Your Journey
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+  <section id="tools" class="tools-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span class="title-white">Our selection of </span>
+        <span class="title-purple">tools</span>
+      </h2>
+      <p class="section-subtitle">Professional-grade tools designed to enhance your Roblox experience</p>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" aria-label="Précédent">&#8249;</button>
+      <div class="tools-carousel">
+
+        <!-- Card: Copy Games -->
+        <article class="tool-card featured">
+          <div class="card-glow"></div>
+          <div class="card-border"></div>
+          <div class="popular-badge">⭐  INSTANT COPY </div>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-icon"><i class="fas fa-bolt"></i></div>
+              <div class="card-title-section">
+                <h3 class="card-title">Copy Games</h3>
+                <span class="card-subtitle">(BloxTools)</span>
+              </div>
+            </div>
+            <p class="card-description">Copy any game super efficiently and with ease using our advanced AI technology!</p>
+            <div class="card-features">
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Advanced game copy AI</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Class S Support</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Frequent Updates</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Multiple working bots</span></div>
+            </div>
+            <div class="card-footer">
+              <div class="card-cta-text">Game Copier</div>
+              <a href="/Game-copier" class="card-btn hero-btn">Try Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+        <!-- Card: Copy Clothes -->
+        <article class="tool-card featured">
+          <div class="card-glow"></div>
+          <div class="card-border"></div>
+          <div class="popular-badge"> ✅ ANY CLOTHES</div>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+              <div class="card-title-section">
+                <h3 class="card-title">Copy Clothes</h3>
+                <span class="card-subtitle">(BloxTools)</span>
+              </div>
+            </div>
+            <p class="card-description">Fastest clothing copier! Faster than the competition with premium features.</p>
+            <div class="card-features">
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Fast and easy shirt copier</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Class S Support</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Unlimited uses</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Advanced clothing copying bots</span></div>
+            </div>
+            <div class="card-footer">
+              <div class="card-cta-text">Clothing Copier</div>
+              <a href="/Clothing-copier" class="card-btn hero-btn">Try Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card: Follow Bot -->
+        <article class="tool-card featured">
+          <div class="card-glow"></div>
+          <div class="card-border"></div>
+           <div class="popular-badge">⭐ MOST POPULAR</div>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-icon"><i class="fas fa-clock"></i></div>
+              <div class="card-title-section">
+                <h3 class="card-title">Follow Bot</h3>
+                <span class="card-subtitle">(BloxTools)</span>
+              </div>
+            </div>
+            <p class="card-description">This tool used to cost money but we made it free! Get thousands of followers instantly.</p>
+            <div class="card-features">
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Thousands of bots ready to follow</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Class S Support</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Unlimited uses</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>100% uptime to date</span></div>
+            </div>
+            <div class="card-footer">
+              <div class="card-cta-text">Follow Botter</div>
+              <a href="/Follower-bot" class="card-btn hero-btn">Try Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+        
+         <article class="tool-card featured">
+          <div class="card-glow"></div>
+          <div class="card-border"></div>
+          <div class="popular-badge"> 🔥 HOT 🔥 </div>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-icon"><i class="fas fa-tools"></i></div>
+              <div class="card-title-section">
+                <h3 class="card-title">UGC Copier</h3>
+                <span class="card-subtitle">(BloxTools)</span>
+              </div>
+            </div>
+            <p class="card-description">Copy any UGC of the marketplace for free and instantly !
+        <br>
+            </p>
+            <div class="card-features">
+              <div class="feature"><div class="feature-icon"><i class="fas fa-star"></i></div><span>Instant Copy</span></div>
+               <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Unlimited Copy</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-lightbulb"></i></div><span>Secure and undetectable</span></div>
+            <div class="feature"><div class="feature-icon"><i class="fas fa-cogs"></i></div><span>Unlimited and free</span></div>
+            </div>
+            <div class="card-footer">
+              <div class="card-cta-text">UGC Copier</div>
+              <a href="/UGC-copier" class="card-btn hero-btn">Try Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Placeholder: Futur Outil 1 -->
+        <article class="tool-card upgrade">
+          <div class="card-glow"></div>
+          <div class="card-border"></div>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-icon"><i class="fas fa-tools"></i></div>
+              <div class="card-title-section">
+                <h3 class="card-title">Group Stats Booster</h3>
+                <span class="card-subtitle">(BloxTools)</span>
+              </div>
+            </div>
+             <p class="card-description">Get Thousands of visits , likes and favorite stats in your game !
+             <br>
+             </p>
+            <div class="card-features">
+              <div class="feature"><div class="feature-icon"><i class="fas fa-star"></i></div><span>Instant visits added</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-x"></i></div><span> ⚠️ 5 USES PER GAME MAX ⚠️</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-shield"></i></div><span>Secure and undetectable</span></div>
+            <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Multiple Games Support</span></div>
+            </div>
+            <div class="card-footer">
+              <div class="card-cta-text">Group Growth Tool</div>
+              <a href="/Game-Booster" class="card-btn hero-btn">Try Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+        
+        
+
+        <!-- Placeholder: Futur Outil 2 -->
+         <article class="tool-card upgrade">
+          <div class="card-glow"></div>
+          <div class="card-border"></div>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-icon"><i class="fas fa-tools"></i></div>
+              <div class="card-title-section">
+                <h3 class="card-title">Game Visits Booster</h3>
+                <span class="card-subtitle">(BloxTools)</span>
+              </div>
+            </div>
+             <p class="card-description">Get Thousands of users added in your group for free !
+             </p>
+            <div class="card-features">
+              <div class="feature"><div class="feature-icon"><i class="fas fa-star"></i></div><span>Automatic member addition</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-lightbulb"></i></div><span>Supports multiple groups</span></div>
+              <div class="feature"><div class="feature-icon"><i class="fas fa-check"></i></div><span>Secure and undetectable</span></div>
+            <div class="feature"><div class="feature-icon"><i class="fas fa-cogs"></i></div><span>Unlimited and free</span></div>
+            </div>
+            <div class="card-footer">
+              <div class="card-cta-text">Group Growth Tool</div>
+              <a href="/Group-botter" class="card-btn hero-btn">Try Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <button class="carousel-btn next" aria-label="Suivant">&#8250;</button>
+    </div>
+
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-white">Frequently Asked </span>
+                    <span class="title-purple">Questions</span>
+                </h2>
+                <p class="section-subtitle">Here are some common questions people ask us about our services.</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Will I be terminated for using this service?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No you will not be banned for using our services. We ensure complete safety and compliance.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Does this break the Roblox ToS?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our platform makes sure to not break any Terms of service. Your safety is our primary concern.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is roblox against the use of this platform?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Roblox has accepted the use of our services on its platform, and it does not abide or break the Roblox Terms of service.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How long does this take?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Most of the time the assets load under two minutes. If this takes longer please contact our support team.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-bg">
+            <div class="bg-element bg-element-4"></div>
+            <div class="bg-element bg-element-5"></div>
+        </div>
+
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">
+                    <span class="title-white">Looking for </span>
+                    <span class="title-purple">contact?</span>
+                </h2>
+                <p class="section-subtitle">Check out some ways to contact us and get the support you need</p>
+
+                <div class="contact-buttons">
+                    <button class="contact-btn primary" onclick="window.location.href='https://discord.gg/atryx'">
+                        <span class="btn-shimmer"></span>
+                        <span class="btn-content">Discord</span>
+                    </button>
+                    <button class="contact-btn secondary" onclick="window.location.href='https://discord.gg/atryx'">
+                        <span class="btn-content">Online</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                Copyright 2024 BloxTools. All rights reserved. | Made with 
+                <span class="heart">❤️</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const carousel = document.querySelector('.tools-carousel');
+  let cards = Array.from(carousel.querySelectorAll('.tool-card'));
+  let currentIndex = 0;
+
+  // Clonage pour effet infini
+  const total = cards.length;
+  cards.forEach(card => carousel.appendChild(card.cloneNode(true)));
+  cards = Array.from(carousel.querySelectorAll('.tool-card'));
+
+  function updateTransform() {
+    const cardWidth = cards[0].offsetWidth + 32;
+    carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+
+    cards.forEach((card, index) => {
+      card.classList.remove('active');
+    });
+
+    const visibleIndex = currentIndex + 1; // carte centrale
+    if (cards[visibleIndex]) cards[visibleIndex].classList.add('active');
+  }
+
+  document.querySelector('.carousel-btn.next').addEventListener('click', () => {
+    currentIndex++;
+    if (currentIndex >= total) {
+      carousel.style.transition = 'none';
+      currentIndex = 0;
+      carousel.style.transform = `translateX(0px)`;
+      void carousel.offsetWidth;
+      carousel.style.transition = 'transform 0.5s ease';
+      currentIndex++;
+    }
+    updateTransform();
+  });
+
+  document.querySelector('.carousel-btn.prev').addEventListener('click', () => {
+    if (currentIndex === 0) {
+      carousel.style.transition = 'none';
+      currentIndex = total;
+      carousel.style.transform = `translateX(-${currentIndex * (cards[0].offsetWidth + 32)}px)`;
+      void carousel.offsetWidth;
+      carousel.style.transition = 'transform 0.5s ease';
+      currentIndex--;
+    } else {
+      currentIndex--;
+    }
+    updateTransform();
+  });
+
+  updateTransform();
+});
+        // Global variables
+        let raindrops = [];
+        let mousePosition = { x: 0, y: 0 };
+        let currentTextIndex = 0;
+        const texts = ["BloxTools", "Premium Roblox bots", "Free, high quality Roblox Tools!"];
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            initRainEffect();
+            initCursorGlow();
+            initNavigation();
+            initTypingEffect();
+            initFAQ();
+            updateTransform();
+            initScrollAnimations();
+        });
+
+        // Rain Effect
+        function initRainEffect() {
+            const canvas = document.getElementById('rainCanvas');
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initRaindrops();
+            }
+
+            function initRaindrops() {
+                const density = Math.floor(window.innerWidth / 15);
+                raindrops = [];
+
+                for (let i = 0; i < density; i++) {
+                    raindrops.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        length: Math.random() * 20 + 10,
+                        opacity: Math.random() * 0.2 + 0.1,
+                        speed: Math.random() * 5 + 5
+                    });
+                }
+            }
+
+            function drawRain() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                raindrops.forEach(drop => {
+                    ctx.beginPath();
+                    ctx.moveTo(drop.x, drop.y);
+                    ctx.lineTo(drop.x, drop.y + drop.length);
+
+                    const gradient = ctx.createLinearGradient(drop.x, drop.y, drop.x, drop.y + drop.length);
+                    gradient.addColorStop(0, `rgba(255, 192, 203, 0)`);
+                    gradient.addColorStop(1, `rgba(255, 192, 203, ${drop.opacity})`);
+
+                    ctx.strokeStyle = gradient;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    drop.y += drop.speed;
+
+                    if (drop.y > canvas.height) {
+                        drop.y = -drop.length;
+                        drop.x = Math.random() * canvas.width;
+                    }
+                });
+
+                requestAnimationFrame(drawRain);
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            drawRain();
+        }
+
+        // Cursor Glow Effect
+        function initCursorGlow() {
+            const cursorGlow = document.getElementById('cursorGlow');
+
+            document.addEventListener('mousemove', (e) => {
+                mousePosition.x = e.clientX;
+                mousePosition.y = e.clientY;
+
+                cursorGlow.style.left = (e.clientX - 16) + 'px';
+                cursorGlow.style.top = (e.clientY - 16) + 'px';
+            });
+        }
+
+        // Navigation
+        function initNavigation() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Navigation link clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const section = e.target.getAttribute('data-section');
+                    scrollToSection(section);
+                    
+                    // Update active state
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    if (!e.target.classList.contains('mobile-nav-link')) {
+                        e.target.classList.add('active');
+                    } else {
+                        document.querySelector(`.nav-link[data-section="${section}"]`).classList.add('active');
+                    }
+
+                    // Close mobile menu
+                    mobileNav.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                });
+            });
+
+            // Hero button
+            const heroBtn = document.querySelector('.hero-btn');
+            if (heroBtn) {
+                heroBtn.addEventListener('click', () => {
+                    scrollToSection('tools');
+                });
+            }
+        }
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const offsetTop = sectionId === 'home' ? 0 : element.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Typing Effect
+        function initTypingEffect() {
+            const typedTextElement = document.getElementById('typedText');
+            
+            function typeText() {
+                const currentText = texts[currentTextIndex];
+                let index = 0;
+                
+                const typeTimer = setInterval(() => {
+                    if (index <= currentText.length) {
+                        typedTextElement.textContent = currentText.slice(0, index);
+                        index++;
+                    } else {
+                        clearInterval(typeTimer);
+                        setTimeout(() => {
+                            // Backspace effect
+                            const backspaceTimer = setInterval(() => {
+                                if (index > 0) {
+                                    typedTextElement.textContent = currentText.slice(0, index - 1);
+                                    index--;
+                                } else {
+                                    clearInterval(backspaceTimer);
+                                    currentTextIndex = (currentTextIndex + 1) % texts.length;
+                                    setTimeout(typeText, 500);
+                                }
+                            }, 50);
+                        }, 2000);
+                    }
+                }, 100);
+            }
+
+            typeText();
+        }
+
+        // FAQ Accordion
+        function initFAQ() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    const isActive = faqItem.classList.contains('active');
+                    
+                    // Close all FAQ items
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Open clicked item if it wasn't active
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Scroll Animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            const animateElements = document.querySelectorAll('.tool-card, .faq-item, .section-header');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        // Button hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.hero-btn, .card-btn, .contact-btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    const shimmer = button.querySelector('.btn-shimmer');
+                    if (shimmer) {
+                        shimmer.style.left = '100%';
+                        setTimeout(() => {
+                            shimmer.style.left = '-100%';
+                        }, 700);
+                    }
+                });
+            });
+        });
+
+        // Scroll-based navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = ['home', 'tools', 'faq', 'contact'];
+            const scrollPosition = window.scrollY + 100;
+
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        const activeLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
